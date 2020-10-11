@@ -1,6 +1,6 @@
 {
   "name": "inb-react-native-notifications",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Advanced Push Notifications (Silent, interactive notifications) for iOS & Android",
   "author": "JTP <lidan.hifi@gmail.com>",
   "license": "MIT",
