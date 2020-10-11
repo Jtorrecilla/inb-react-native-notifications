@@ -1,8 +1,8 @@
 {
-  "name": "react-native-notifications",
-  "version": "3.3.4",
+  "name": "inb-react-native-notifications",
+  "version": "1.0.7",
   "description": "Advanced Push Notifications (Silent, interactive notifications) for iOS & Android",
-  "author": "Lidan Hifi <lidan.hifi@gmail.com>",
+  "author": "JTP <lidan.hifi@gmail.com>",
   "license": "MIT",
   "keywords": [
     "react-component",
@@ -22,7 +22,7 @@
   "main": "lib/dist/index.js",
   "typings": "lib/dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./lib/dist && tsc",
+    "build": "rmdir lib/dist /s /q & tsc",
     "prestart": "npm run build",
     "pretest-js": "npm run build",
     "pretest-unit-ios": "npm run build",

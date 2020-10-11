@@ -8,15 +8,7 @@
     "jsx": "react-native",
     "declaration": true,
     "skipLibCheck": true,
-    "types": [
-      "jest",
-      "lodash",
-      "react",
-      "react-native",
-      "react-test-renderer"
-    ]
+    "types": ["jest", "lodash", "react", "react-native", "react-test-renderer"]
   },
-  "include": [
-    "./lib/src/**/*"
-  ]
+  "include": ["./lib/src/**/*"]
 }

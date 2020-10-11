@@ -59,7 +59,7 @@ public class PushNotification implements IPushNotification {
 
     @Override
     public void onReceived() throws InvalidNotificationException {
-        if (!mAppLifecycleFacade.isAppVisible()) {
+        if (!mAppLifecycleFacade.isAppVisible() && !mNotificationProps.isFirebaseBackgroundPayload()) {
             postNotification(null);
         }
         notifyReceivedToJS();
@@ -100,8 +100,6 @@ public class PushNotification implements IPushNotification {
 
         if (mAppLifecycleFacade.isAppVisible()) {
             dispatchImmediately();
-        } else if (mAppLifecycleFacade.isAppDestroyed()) {
-            launchOrResumeApp();
         } else {
             dispatchUponVisibility();
         }
@@ -148,8 +146,10 @@ public class PushNotification implements IPushNotification {
         final Notification.Builder notification = new Notification.Builder(mContext)
                 .setContentTitle(mNotificationProps.getTitle())
                 .setContentText(mNotificationProps.getBody())
-                .setContentIntent(intent)
+                .setFullScreenIntent(intent,true)
                 .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(Notification.PRIORITY_MAX)
+                .setStyle(new Notification.BigTextStyle().bigText(mNotificationProps.getBody()))
                 .setAutoCancel(true);
 
         setUpIcon(notification);
@@ -157,7 +157,7 @@ public class PushNotification implements IPushNotification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
                     CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager.IMPORTANCE_HIGH);
             final NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.createNotificationChannel(channel);
             notification.setChannelId(CHANNEL_ID);
